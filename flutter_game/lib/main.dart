@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-import 'core/loop.dart';
+import 'package:flutter_game/core/game.dart';
 
 void main() {
     WidgetsFlutterBinding.ensureInitialized();
@@ -11,9 +10,7 @@ void main() {
       SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [SystemUiOverlay.bottom]);
   runApp(const MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: Center(
-      child: Text('Game'),
-    ),
+    home: Game(),
   ));
     });
 }
