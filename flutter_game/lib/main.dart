@@ -8,6 +8,7 @@ void main() {
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight
     ]).whenComplete((){
+      SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [SystemUiOverlay.bottom]);
   runApp(const MaterialApp(
     debugShowCheckedModeBanner: false,
     home: Center(
