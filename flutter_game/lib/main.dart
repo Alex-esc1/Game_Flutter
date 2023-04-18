@@ -7,11 +7,12 @@ void main() {
     WidgetsFlutterBinding.ensureInitialized();
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight
-    ]);
+    ]).whenComplete((){
   runApp(const MaterialApp(
     debugShowCheckedModeBanner: false,
     home: Center(
       child: Text('Game'),
     ),
   ));
+    });
 }
