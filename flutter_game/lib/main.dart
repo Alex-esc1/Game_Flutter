@@ -10,7 +10,22 @@ void main() {
       SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [SystemUiOverlay.bottom]);
   runApp(const MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: Game(),
+    home: SafeArea(
+      child: Scaffold(
+        body: MyApp(),
+      ),
+    )
+    
+    
   ));
     });
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Game();
+  }
 }
