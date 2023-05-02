@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_game/core/scenes/scene.dart';
 import 'package:flutter_game/entities/bullet.dart';
 import 'package:flutter_game/entities/player.dart';

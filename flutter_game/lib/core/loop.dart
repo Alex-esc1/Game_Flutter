@@ -15,7 +15,7 @@ void mainLoop(SendPort sendPort) async {
   _timerWatch.start();
 
   while (_run) {
-    if (_loopWatch.elapsedMilliseconds > _updateTime) {
+    if (_loopWatch.elapsedMilliseconds >= _updateTime) {
       _updates++;
       _loopWatch.reset();
       sendPort.send(true);
