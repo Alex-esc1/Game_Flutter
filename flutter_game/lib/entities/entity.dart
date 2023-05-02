@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
 abstract class Entity{
-  double x;
-  double y;
-  String spritename = '';
+  double x = 0;
+  double y = 0;
+  String spriteName = '';
   bool visible = true;
   List sprites = [];
 
-  Entity(this.spritename) {
+  Entity(this.spriteName) {
     for (var i = 0; i < 4; i++) {
-      sprites.add(Image.asset("assets/$spritename$i.png"));
+      sprites.add(Image.asset("assets/$spriteName$i.png"));
     }
   }
   void update();
