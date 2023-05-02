@@ -18,6 +18,8 @@ class Player extends Entity {
   double _speed = 3;
   bool isAcceleration = false;
 
+  get getAngle => _angle;
+
   @override
   Widget build() {
     return Positioned(

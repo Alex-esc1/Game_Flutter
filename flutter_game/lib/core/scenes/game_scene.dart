@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_game/core/scenes/scene.dart';
+import 'package:flutter_game/entities/bullet.dart';
 import 'package:flutter_game/entities/player.dart';
 import 'package:flutter_game/util/vars.dart';
 
 class GameScene extends AppScene {
   Player _player = Player();
   double _startGlobalPosition = 0;
+  List<Bullet> _listBullet = [];
+  List<Widget> _listWidget = [];
 
   @override
   Widget buildScene() {
@@ -17,8 +20,6 @@ class GameScene extends AppScene {
             top: 0,
             left: 0,
             child: Container(
-              decoration:
-                  BoxDecoration(border: Border.all(color: Colors.green)),
               width: GlobalVars.screenWidth / 2,
               height: GlobalVars.screenHeight,
               child: GestureDetector(
@@ -30,14 +31,25 @@ class GameScene extends AppScene {
             top: 0,
             left: GlobalVars.screenWidth / 2,
             child: Container(
-              decoration:
-                  BoxDecoration(border: Border.all(color: Colors.green)),
               width: GlobalVars.screenWidth / 2,
               height: GlobalVars.screenHeight / 2,
               child: GestureDetector(
                 onTap: _onAcceleration,
               ),
-            ))
+            )),
+        Positioned(
+            top: GlobalVars.screenHeight / 2,
+            left: GlobalVars.screenWidth / 2,
+            child: Container(
+              width: GlobalVars.screenWidth / 2,
+              height: GlobalVars.screenHeight / 2,
+              child: GestureDetector(
+                onTap: _onShoot,
+              ),
+            )),
+        Stack(
+          children: _listWidget,
+        )
       ],
     );
   }
@@ -45,6 +57,12 @@ class GameScene extends AppScene {
   @override
   void update() {
     _player.update();
+    _listWidget.clear();
+    _listBullet.removeWhere((element) => !element.visible);
+    _listBullet.forEach((element) {
+      _listWidget.add(element.build());
+      element.update();
+    });
   }
 
   GameScene();
@@ -67,5 +85,10 @@ class GameScene extends AppScene {
 
   void _onAcceleration() {
     _player.isAcceleration = _player.isAcceleration ? false : true;
+  }
+
+  void _onShoot() {
+    _listBullet.add(Bullet(
+        playerAngle: _player.getAngle, playerX: _player.x, playerY: _player.y));
   }
 }
