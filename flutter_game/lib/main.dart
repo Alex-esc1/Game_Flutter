@@ -1,6 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_game/core/game.dart';
+import 'package:flutter_game/core/game_core/game.dart';
 import 'package:flutter_game/util/vars.dart';
 
 void main() {
@@ -8,9 +9,9 @@ void main() {
   SystemChrome.setPreferredOrientations(
           [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight])
       .whenComplete(() {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-        overlays: [SystemUiOverlay.bottom]);
-    runApp(const MaterialApp(
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [SystemUiOverlay.bottom]);
+
+    runApp(MaterialApp(
         debugShowCheckedModeBanner: false,
         home: SafeArea(
           child: Scaffold(
@@ -22,31 +23,28 @@ void main() {
 
 class MyApp extends StatefulWidget {
 
-
-  const MyApp({super.key});
-
   @override
-  State<MyApp> createState() => _MyAppState();
+  _MyAppState createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
 
   @override
   void didChangeDependencies() {
-    initGame();
+    initGame(context);
     super.didChangeDependencies();
   }
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage('assets/background.png'), fit: BoxFit.cover)),
-      child: const Game(),
-    );
+        decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage("assets/background.png"), fit: BoxFit.cover)),
+        child: Game());
   }
-  
-  void initGame() {
+
+  void initGame(BuildContext context) {
     GlobalVars.screenWidth = MediaQuery.of(context).size.width;
     GlobalVars.screenHeight = MediaQuery.of(context).size.height;
   }
