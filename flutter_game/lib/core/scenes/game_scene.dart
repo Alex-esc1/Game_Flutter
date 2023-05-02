@@ -13,21 +13,32 @@ class GameScene extends AppScene {
     return Stack(
       children: [
         _player.build(),
-
         Positioned(
-          top: 0,
-          left: 0,
-          child: Container(
-            decoration: BoxDecoration(border: Border.all(color: Colors.green)),
-            width: GlobalVars.screenWidth / 2,
-            height: GlobalVars.screenHeight,
-            child: GestureDetector(
-              onPanStart: _onPanStart,
-              onPanUpdate: _onPanupdate,
-            ),
-          ))
-        
-        ],
+            top: 0,
+            left: 0,
+            child: Container(
+              decoration:
+                  BoxDecoration(border: Border.all(color: Colors.green)),
+              width: GlobalVars.screenWidth / 2,
+              height: GlobalVars.screenHeight,
+              child: GestureDetector(
+                onPanStart: _onPanStart,
+                onPanUpdate: _onPanupdate,
+              ),
+            )),
+        Positioned(
+            top: 0,
+            left: GlobalVars.screenWidth / 2,
+            child: Container(
+              decoration:
+                  BoxDecoration(border: Border.all(color: Colors.green)),
+              width: GlobalVars.screenWidth / 2,
+              height: GlobalVars.screenHeight / 2,
+              child: GestureDetector(
+                onTap: _onAcceleration,
+              ),
+            ))
+      ],
     );
   }
 
@@ -39,20 +50,22 @@ class GameScene extends AppScene {
   GameScene();
 
   void _onPanStart(DragStartDetails details) {
-
     _startGlobalPosition = details.globalPosition.dx;
-
   }
 
   void _onPanupdate(DragUpdateDetails details) {
     double updateGlobalPosition = details.globalPosition.dx;
-    if(updateGlobalPosition > _startGlobalPosition + 30) {
+    if (updateGlobalPosition > _startGlobalPosition + 30) {
       // right;
       _player.isMoveRight = true;
     }
-    if(updateGlobalPosition < _startGlobalPosition - 30) {
+    if (updateGlobalPosition < _startGlobalPosition - 30) {
       // left;
       _player.isMoveLeft = true;
     }
+  }
+
+  void _onAcceleration() {
+    _player.isAcceleration = _player.isAcceleration ? false : true;
   }
 }
